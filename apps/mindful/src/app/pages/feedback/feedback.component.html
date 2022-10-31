@@ -1,0 +1,66 @@
+<div class="page">
+  <header>
+    <p-toolbar styleClass="h-5rem">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-arrow-left"
+        label="Feedback"
+        class="p-button-lg p-button-rounded p-button-text text-white"
+        (click)="back()"
+      ></button>
+    </p-toolbar>
+  </header>
+  <main class="p-4">
+    <div [formGroup]="feedbackFormGroup" class="grid p-fluid">
+      <div class="field col-12">
+        <label for="job">Beruf</label>
+        <input formControlName="job" id="job" type="text" pInputText />
+      </div>
+
+      <div class="field col-6">
+        <label for="age">Alter</label>
+        <p-inputNumber
+          formControlName="age"
+          inputId="age"
+          [maxlength]="3"
+          [useGrouping]="false"
+          [min]="5"
+          [max]="100"
+        >
+        </p-inputNumber>
+      </div>
+      <!-- <div class="field col-6">
+        <label for="gender">Gender</label>
+        <p-dropdown
+          formControlName="gender"
+          [options]="['male', 'female']"
+          placeholder="Select a gender"
+        >
+        </p-dropdown>
+      </div> -->
+
+      <div class="field col-12">
+        <label for="note">Beschreiben Sie ihr Feedback</label>
+        <textarea
+          formControlName="note"
+          id="note"
+          [rows]="10"
+          pInputTextarea
+        ></textarea>
+      </div>
+    </div>
+  </main>
+  <footer class="p-2">
+    <button
+      pButton
+      pRipple
+      class="w-full"
+      styleClass="p-button-lg"
+      label="Absenden"
+      [disabled]="!feedbackFormGroup.valid"
+      [loading]="isLoading"
+      (click)="submit()"
+    ></button>
+  </footer>
+</div>

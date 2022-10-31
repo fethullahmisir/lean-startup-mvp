@@ -1,0 +1,48 @@
+<div class="page">
+  <header>
+    <p-toolbar styleClass="h-5rem">
+      <div class="p-toolbar-group-left" (click)="showAppVersion()">
+        <i class="pi pi-verified text-xl"></i>
+      </div>
+    </p-toolbar>
+  </header>
+  <main>
+    <div *ngIf="records$ | async as records" class="grid-layout">
+      <img
+        *ngFor="let record of records; let index = index"
+        (click)="navigate(record)"
+        class="grid-item img"
+        [ngClass]="{
+          large1: index === 0,
+          large2: index === 30
+        }"
+        [src]="record.urls[0]"
+      />
+    </div>
+  </main>
+  <footer>
+    <p-toolbar styleClass="justify-content-around">
+      <button
+        pButton
+        type="button"
+        routerLink="/"
+        icon="pi pi-home"
+        class="p-button-lg p-button-rounded p-button-text text-white outline-none"
+      ></button>
+      <button
+        pButton
+        type="button"
+        routerLink="/collection"
+        icon="pi pi-book"
+        class="p-button-lg p-button-rounded p-button-text text-white outline-none"
+      ></button>
+      <!-- <button
+        pButton
+        type="button"
+        routerLink="/feedback"
+        icon="pi pi-pencil"
+        class="p-button-lg p-button-rounded p-button-text text-white outline-none"
+      ></button> -->
+    </p-toolbar>
+  </footer>
+</div>

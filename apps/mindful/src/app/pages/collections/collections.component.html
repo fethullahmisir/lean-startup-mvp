@@ -1,0 +1,56 @@
+<div class="page">
+  <header>
+    <p-toolbar styleClass="h-5rem">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-arrow-left"
+        label="Sammlungen"
+        class="p-button-lg p-button-rounded p-button-text text-white"
+        (click)="back()"
+      ></button>
+    </p-toolbar>
+  </header>
+  <main class="p-4">
+    <div *ngIf="collections$ | async as records">
+      <div *ngIf="records.length > 0; else noContent" class="grid">
+        <p-card
+          *ngFor="let record of records"
+          class="col-6"
+          styleClass="p-card-shadow"
+        >
+          <ng-template pTemplate="header">
+            <img
+              [routerLink]="['/detail', record.id]"
+              alt="Card"
+              [src]="record.urls[0]"
+            />
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-between">
+              <div></div>
+              <button
+                pButton
+                type="button"
+                (click)="removeBookmark(record)"
+                icon="pi pi-bookmark-fill"
+                class="p-button-lg p-button-rounded p-button-text text-white outline-none"
+              ></button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+    <ng-template #noContent>
+      <div class="flex flex-column">
+        <h1>Hier sieht es leer aus!</h1>
+        <p>
+          Ihre Sammlungen werden auf dieser Seite erscheinen. Starten Sie Ihre
+          erste Sammlung, indem Sie auf der Detailseite auf das Lesezeichen
+          klicken
+        </p>
+      </div>
+    </ng-template>
+  </main>
+  <footer></footer>
+</div>

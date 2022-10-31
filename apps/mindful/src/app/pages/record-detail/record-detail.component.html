@@ -1,0 +1,65 @@
+<div class="page">
+  <header>
+    <p-toolbar styleClass="h-5rem">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-arrow-left"
+        label="Details"
+        class="p-button-lg p-button-rounded p-button-text text-white"
+        (click)="back()"
+      ></button>
+    </p-toolbar>
+  </header>
+  <main>
+    <ng-container *ngIf="record; else notFound">
+      <p-galleria
+        [value]="record.urls"
+        [responsiveOptions]="responsiveOptions"
+        [containerStyle]="{ 'max-width': '640px' }"
+        [circular]="true"
+        [showItemNavigators]="true"
+        [showItemNavigatorsOnHover]="true"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+        [showIndicatorsOnItem]="false"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item" style="width: 100%; display: block" />
+        </ng-template>
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-end">
+            <i class="text-xl pi pi-share-alt mr-4" (click)="share()"></i>
+            <i
+              class="text-xl"
+              [ngClass]="
+                record.bookmarked ? 'pi pi-bookmark-fill' : 'pi pi-bookmark'
+              "
+              (click)="save()"
+            ></i>
+          </div>
+        </ng-template>
+      </p-galleria>
+
+      <div class="m-2 mt-2">
+        <h1>Mehr über die Zeit</h1>
+
+        <div class="flex-layout">
+          <img
+            *ngFor="let recommandation of recommandations"
+            class="flex-item"
+            [src]="recommandation.urls[0]"
+          />
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #notFound>
+      <div class="p-4">
+        <p class="font-semibold text-xl">Tut uns leid :(</p>
+        <p>Etwas ist schief gelaufen. Wir konnten keine Ergebnisse finden.</p>
+      </div>
+    </ng-template>
+  </main>
+  <footer></footer>
+</div>
